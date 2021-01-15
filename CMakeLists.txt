@@ -12,6 +12,9 @@ project(ctp_demo)
 set(CMAKE_CXX_STANDARD 11)
 
 
+add_compile_options(-DENVSIMNOW)
+
+
 include_directories(include)
 
 link_directories(lib)
