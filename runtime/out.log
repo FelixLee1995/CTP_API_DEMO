@@ -1,0 +1,18 @@
+hello test!
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from TradeApiTest
+[ RUN      ] TradeApiTest.Order_CFFEX_Limit
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+OnRtnOrder, instrument: IF2102 , CFFEX买开2手, 价格: 2102, 已成交手数: 0, 状态:未知, 报单状态信息: 报单已提交, OrderRef:            1, OrderLocalID:        24452, OrderSysID: 
+OnRtnOrder, instrument: IF2102 , CFFEX买开2手, 价格: 2102, 已成交手数: 0, 状态:已撤销, 报单状态信息: 26:已撤单报单被拒绝CFFEX:当前状态禁止此项操作, OrderRef:            1, OrderLocalID:        24452, OrderSysID: 
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.Order_CFFEX_Limit (4108 ms)
+[----------] 1 test from TradeApiTest (4108 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (4108 ms total)
+[  PASSED  ] 1 test.

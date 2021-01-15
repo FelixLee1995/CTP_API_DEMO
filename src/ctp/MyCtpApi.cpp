@@ -9,6 +9,7 @@ MyCtpApi::MyCtpApi(std::string brokerid, std::string userid, std::string pwd, st
     m_appid(appid),
     m_authcode(authcode),
     m_api(nullptr),
+    m_spi(nullptr),
     m_front_connect_stautus(false),
     m_auth_stautus(false),
     m_login_stautus(false)
@@ -17,10 +18,33 @@ MyCtpApi::MyCtpApi(std::string brokerid, std::string userid, std::string pwd, st
 }
 
 
+void MyCtpApi::Dispose() {
+
+}
+
+
+MyCtpApi::~MyCtpApi() {
+    std::cout <<  "MyCtpApi deConstruction!" << std::endl;
+
+    if (m_api)
+    {
+        m_api->RegisterSpi(nullptr);
+        m_api->Release();
+        m_api = nullptr;
+    }
+
+    if (m_spi)
+    {
+        delete m_spi;
+        m_spi = nullptr;
+    }
+}
+
+
 void MyCtpApi::Init() {
     m_api = CThostFtdcTraderApi::CreateFtdcTraderApi();
-    MyCtpSpi* spi = new MyCtpSpi(this);
-    m_api->RegisterSpi(spi);
+    m_spi = new MyCtpSpi(this);
+    m_api->RegisterSpi(m_spi);
 
     m_api->RegisterFront(const_cast<char *>(m_front_addr.c_str()));
     m_api->SubscribePrivateTopic(THOST_TERT_QUICK);
@@ -124,4 +148,94 @@ int MyCtpApi::ReqSettlementInfoConfirm() {
     m_api->ReqSettlementInfoConfirm(&field, m_rid++);
 
     return SYS_OK;
+}
+
+
+int MyCtpApi::ReqOrderInsert(const Order& order, OrderType type){
+
+
+    CThostFtdcInputOrderField ord = {0};
+    //memset(&ord, 0, sizeof(ord));
+
+    strcpy(ord.BrokerID, m_brokerid.c_str());
+    strcpy(ord.InvestorID, m_userid.c_str());
+
+    strcpy(ord.OrderRef, "");
+
+
+    strcpy(ord.InstrumentID, order.instrumentid.c_str());
+    ord.Direction = order.direction;
+    ord.LimitPrice = order.limitPrice;
+    ord.VolumeTotalOriginal = order.volumeTotalOrigin;
+    //开平
+    ord.CombOffsetFlag[0] = order.offsetflag;
+
+
+    //投机套保套利
+    ord.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
+    ord.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
+    ord.ContingentCondition = THOST_FTDC_CC_Immediately;
+    ord.IsAutoSuspend = 0;
+    ord.UserForceClose = 0;
+
+
+    switch (type)
+    {
+    case OrderType::LimitPrice:
+    {
+        ord.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+        ord.TimeCondition = THOST_FTDC_TC_GFD;
+        ord.VolumeCondition = THOST_FTDC_VC_AV;
+        ord.MinVolume = 1;
+        break;
+    }
+     
+       case OrderType::Market:
+    {
+        ord.OrderPriceType = THOST_FTDC_OPT_AnyPrice;
+        ord.TimeCondition = THOST_FTDC_TC_IOC;
+        ord.LimitPrice = 0;
+        ord.VolumeCondition = THOST_FTDC_VC_AV;
+        ord.MinVolume = 1;
+        break;
+    }
+       case OrderType::LimitToMarket:
+    {
+        ord.OrderPriceType = THOST_FTDC_OPT_FiveLevelPrice;
+        ord.TimeCondition = THOST_FTDC_TC_GFD;
+        ord.VolumeCondition = THOST_FTDC_VC_AV;
+        ord.MinVolume = 1;
+        break;
+    }
+       case OrderType::FOK:
+    {
+        ord.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+        ord.TimeCondition = THOST_FTDC_TC_IOC;
+        ord.VolumeCondition = THOST_FTDC_VC_CV;
+        ord.MinVolume = 1;
+        break;
+    }
+      case OrderType::FAK:
+    {
+        ord.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+        ord.TimeCondition = THOST_FTDC_TC_IOC;
+        if (order.minVolume < 1) {
+            ord.MinVolume = 1;
+        }
+        else
+        {
+            ord.MinVolume = order.minVolume;
+        }
+        ord.VolumeCondition = THOST_FTDC_VC_MV;
+        break;
+    }
+
+    default:
+        std::cout << "OrderType Invalid!" << std::endl;
+        break;
+    }
+
+    m_api->ReqOrderInsert(&ord, m_rid++);
+    
+
 }

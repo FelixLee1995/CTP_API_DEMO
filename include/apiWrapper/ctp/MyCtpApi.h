@@ -8,35 +8,37 @@
 const int SYS_OK = 0;
 const int SYS_FAIL = -1;
 
+class MyCtpSpi;
 
-// CThostFtdcInputOrderField ord;
-// memset(&ord, 0, sizeof(ord));
-
-
-// strcpy(ord.BrokerID, “2030”);
-// strcpy(ord.InvestorID, “023526”);
-
-// strcpy(ord.InstrumentID, “rb1601”);
-// strcpy(ord.OrderRef, “”);
-
-// ord.Direction = THOST_FTDC_D_Buy;
-// ord.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
-// ord.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
-// ord.VolumeTotalOriginal = 1;
-// ord.ContingentCondition = THOST_FTDC_CC_Immediately;
-// ord.VolumeCondition = THOST_FTDC_VC_AV;
-// ord.MinVolume = 1;
-// ord.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
-// ord.IsAutoSuspend = 0;
-// ord.UserForceClose = 0;
 
 
 struct UserInfo {
-
+    std::string userid;
+    std::string brokerid;
 };
 
 struct Order {
+    std::string userid;
+    std::string brokerid;
+    std::string instrumentid;
+    char direction;
+    char offsetflag;
+    int volumeTotalOrigin;
+    int volumeCondition;
+    int minVolume;
 
+    char orderPriceType;
+    double limitPrice;
+    char timeCondition;
+
+};
+
+enum OrderType{
+    LimitPrice = 0,
+    Market = 1,
+    LimitToMarket = 2,
+    FOK = 3,
+    FAK =4
 };
 
 
@@ -59,13 +61,18 @@ class MyCtpApi {
         int ReqQrySettlementInfo();
         int ReqSettlementInfoConfirm();
 
-        int ReqOrderInsert();
+        int ReqOrderInsert(const Order& order, OrderType);
         int ReqOrderAction();
+
 
         void Dispose();
 
+        bool GetConnectStatus(){ return m_front_connect_stautus.load();}
+        bool GetAuthStatus(){return m_auth_stautus;}
+        bool GetLoginStatus(){return m_login_stautus;}
 
     private:
+
         //reqid, increased
         int m_rid;
         std::string m_brokerid;
@@ -81,5 +88,6 @@ class MyCtpApi {
 
 
         CThostFtdcTraderApi * m_api;
+        MyCtpSpi* m_spi;
         friend class MyCtpSpi;
 };

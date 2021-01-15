@@ -10,6 +10,26 @@ MyCtpSpi::~MyCtpSpi() {
 
 }
 
+std::string MyCtpSpi::ConvertOrderStatus(char orderStatus)
+{
+
+	switch (orderStatus)
+	{
+	case THOST_FTDC_OST_AllTraded:
+		return "全部成交";
+	case THOST_FTDC_OST_PartTradedQueueing:
+		return "部分成交";
+	case THOST_FTDC_OST_NoTradeQueueing:
+		return "未成交";
+	case THOST_FTDC_OST_Canceled:
+		return "已撤销";
+	case THOST_FTDC_OST_Unknown:
+		return "未知";
+	default:
+		return "非法的状态";
+	}
+}
+
 
 void MyCtpSpi::OnFrontConnected() {
     std::cout << "TradeFront connected!" << std::endl;
@@ -106,9 +126,62 @@ void MyCtpSpi::OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField *
     else {
         std::cout << "Failed to settlementInfoConfirm" << std::endl;
     }
-
-    
-
+}
 
 
+void MyCtpSpi::OnRtnOrder(CThostFtdcOrderField *pOrder) 
+{
+    std::cout << "OnRtnOrder, instrument: " <<   pOrder->InstrumentID << " , " << pOrder->ExchangeID
+        << (pOrder->Direction == '0' ?  "买" : "卖" )
+        << (pOrder->CombOffsetFlag[0] == '0' ?  "开" : "平")
+        << pOrder->VolumeTotalOriginal << "手, "
+        << "价格: " << pOrder->LimitPrice
+        << ", 已成交手数: " << pOrder->VolumeTraded
+        << ", 状态:" << ConvertOrderStatus(pOrder->OrderStatus)
+        << ", 报单状态信息: " << pOrder->StatusMsg 
+        << ", OrderRef: " << pOrder->OrderRef 
+        << ", OrderLocalID: " << pOrder->OrderLocalID 
+        << ", OrderSysID: " << pOrder->OrderSysID
+        << std::endl; 
+}
+
+
+void MyCtpSpi::OnErrRtnOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo)
+{
+    if (pRspInfo&& pInputOrder) {
+        std::cout << "OnErrRtnOrderInsert" <<  pInputOrder->InstrumentID << " , " << pInputOrder->ExchangeID
+        << (pInputOrder->Direction == '0' ?  "买" : "卖" )
+        << (pInputOrder->CombOffsetFlag[0] == '0' ?  "开" : "平")
+        << pInputOrder->VolumeTotalOriginal << "手, "
+        << "价格: " << pInputOrder->LimitPrice
+        << ", 错误码: " << pRspInfo->ErrorID
+        << ", 错误信息: " << pRspInfo->ErrorMsg
+        << std::endl;
+    }
+}
+
+
+void MyCtpSpi::OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+       if (pRspInfo&& pInputOrder) {
+        std::cout << "OnRspOrderInsert" <<  pInputOrder->InstrumentID << " , " << pInputOrder->ExchangeID
+        << (pInputOrder->Direction == '0' ?  "买" : "卖" )
+        << (pInputOrder->CombOffsetFlag[0] == '0' ?  "开" : "平")
+        << pInputOrder->VolumeTotalOriginal << "手, "
+        << "价格: " << pInputOrder->LimitPrice
+        << ", 错误码: " << pRspInfo->ErrorID
+        << ", 错误信息: " << pRspInfo->ErrorMsg
+        << std::endl;
+    } 
+
+}
+
+
+void MyCtpSpi::OnRtnTrade(CThostFtdcTradeField *pTrade) 
+{
+     std::cout << "OnRtnTrade, instrument: " <<   pTrade->InstrumentID << " , " << pTrade->ExchangeID
+        << (pTrade->Direction == '0' ?  "买" : "卖" )
+        << (pTrade->OffsetFlag == '0' ?  "开" : "平")
+        << "成交" << pTrade->Volume << "手, "
+        << "价格: " << pTrade->Price  << std::endl; 
 }

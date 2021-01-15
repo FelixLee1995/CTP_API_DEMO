@@ -2,7 +2,10 @@
 #include "api/ctp/ThostFtdcTraderApi.h"
 #include "apiWrapper/ctp/MyCtpApi.h"
 #include <iostream>
+
 class MyCtpApi;
+
+
 
 class MyCtpSpi: public CThostFtdcTraderSpi {
 
@@ -11,6 +14,8 @@ class MyCtpSpi: public CThostFtdcTraderSpi {
 		MyCtpSpi(MyCtpApi * api);
 
 		~MyCtpSpi();
+
+		std::string ConvertOrderStatus(char orderStatus);
 
         void OnFrontConnected() override;
         void OnFrontDisconnected(int nReason) override;
@@ -21,7 +26,7 @@ class MyCtpSpi: public CThostFtdcTraderSpi {
 	    void OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
         ///����¼��������Ӧ
-	virtual void OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+	void OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) override;
 ///��������������Ӧ
 	virtual void OnRspOrderAction(CThostFtdcInputOrderActionField *pInputOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
@@ -55,13 +60,13 @@ class MyCtpSpi: public CThostFtdcTraderSpi {
 
 
 ///����֪ͨ
-	virtual void OnRtnOrder(CThostFtdcOrderField *pOrder) {};
+	void OnRtnOrder(CThostFtdcOrderField *pOrder) override;
 
 	///�ɽ�֪ͨ
-	virtual void OnRtnTrade(CThostFtdcTradeField *pTrade) {};
+ 	void OnRtnTrade(CThostFtdcTradeField *pTrade) override;
 
 	///����¼�����ر�
-	virtual void OnErrRtnOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo) {};
+  	void OnErrRtnOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo) override;
 
 	///������������ر�
 	virtual void OnErrRtnOrderAction(CThostFtdcOrderActionField *pOrderAction, CThostFtdcRspInfoField *pRspInfo) {};
