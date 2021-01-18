@@ -1,13 +1,9 @@
 #include <iostream>
-#include "test_order_insert.h"
-
+#include "test_md_sub.h"
 
 
 
 int main(){
     testing::InitGoogleTest();
-
-    std::cout << "hello test!" << std::endl;
-
     return RUN_ALL_TESTS();
 }

@@ -1,0 +1,48 @@
+[==========] Running 5 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 5 tests from TradeApiTest
+[ RUN      ] TradeApiTest.QryTrade
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+OnRspQryTrade Failed!
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.QryTrade (4114 ms)
+[ RUN      ] TradeApiTest.QryOrder
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+OnRspQryTrade Failed!
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.QryOrder (4107 ms)
+[ RUN      ] TradeApiTest.QryTradingAccount
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+OnRspQryTradingAccount Failed!
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.QryTradingAccount (4107 ms)
+[ RUN      ] TradeApiTest.QryPositionDetail
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+OnRspQryInvestorPositionDetail Failed!
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.QryPositionDetail (4110 ms)
+[ RUN      ] TradeApiTest.QryMarketData
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+pDepthMarketData Failed!
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.QryMarketData (4107 ms)
+[----------] 5 tests from TradeApiTest (20545 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test suite ran. (20545 ms total)
+[  PASSED  ] 5 tests.

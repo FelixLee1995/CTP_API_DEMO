@@ -133,9 +133,9 @@ int MyCtpApi::ReqQrySettlementInfo() {
 
 
 int MyCtpApi::ReqSettlementInfoConfirm() {
-     auto check_flag = m_login_stautus.load();
+    auto check_flag = m_login_stautus.load();
 
-    if (!check_flag) 
+    if (!check_flag)
     {
         std::cout << "please login fisrt!" << std::endl;
         return SYS_FAIL;
@@ -153,6 +153,13 @@ int MyCtpApi::ReqSettlementInfoConfirm() {
 
 int MyCtpApi::ReqOrderInsert(const Order& order, OrderType type){
 
+    auto check_flag = m_login_stautus.load();
+
+    if (!check_flag)
+    {
+        std::cout << "please login fisrt!" << std::endl;
+        return SYS_FAIL;
+    }
 
     CThostFtdcInputOrderField ord = {0};
     //memset(&ord, 0, sizeof(ord));
@@ -235,7 +242,95 @@ int MyCtpApi::ReqOrderInsert(const Order& order, OrderType type){
         break;
     }
 
-    m_api->ReqOrderInsert(&ord, m_rid++);
-    
+    return m_api->ReqOrderInsert(&ord, m_rid++);
+}
 
+
+
+int MyCtpApi::ReqQryTrade()
+{
+    auto check_flag = m_login_stautus.load();
+
+    if (!check_flag)
+    {
+        std::cout << "please login fisrt!" << std::endl;
+        return SYS_FAIL;
+    }
+
+    CThostFtdcQryTradeField field = {0};
+    strcpy(field.BrokerID, m_brokerid.c_str());
+    strcpy(field.InvestorID, m_userid.c_str());
+
+    return m_api->ReqQryTrade(&field, m_rid++);
+}
+
+
+
+int MyCtpApi::ReqQryOrder()
+{
+    auto check_flag = m_login_stautus.load();
+
+    if (!check_flag)
+    {
+        std::cout << "please login fisrt!" << std::endl;
+        return SYS_FAIL;
+    }
+
+    CThostFtdcQryOrderField field = {0};
+    strcpy(field.BrokerID, m_brokerid.c_str());
+    strcpy(field.InvestorID, m_userid.c_str());
+
+    return m_api->ReqQryOrder(&field, m_rid++);
+}
+
+int MyCtpApi::ReqQryTradingAccount()
+{
+    auto check_flag = m_login_stautus.load();
+
+    if (!check_flag)
+    {
+        std::cout << "please login fisrt!" << std::endl;
+        return SYS_FAIL;
+    }
+
+    CThostFtdcQryTradingAccountField field = {0};
+    strcpy(field.BrokerID, m_brokerid.c_str());
+    strcpy(field.InvestorID, m_userid.c_str());
+    strcpy(field.CurrencyID, "CNY");
+
+    return m_api->ReqQryTradingAccount(&field, m_rid++);
+}
+
+int MyCtpApi::ReqQryPositionDetail()
+{
+    auto check_flag = m_login_stautus.load();
+
+    if (!check_flag)
+    {
+        std::cout << "please login fisrt!" << std::endl;
+        return SYS_FAIL;
+    }
+
+    CThostFtdcQryInvestorPositionDetailField field = {0};
+    strcpy(field.BrokerID, m_brokerid.c_str());
+    strcpy(field.InvestorID, m_userid.c_str());
+
+    return m_api->ReqQryInvestorPositionDetail(&field, m_rid++);
+}
+
+int MyCtpApi::ReqQryDepthMarketData(const std::string & instrumentID)
+{
+    auto check_flag = m_login_stautus.load();
+
+    if (!check_flag)
+    {
+        std::cout << "please login fisrt!" << std::endl;
+        return SYS_FAIL;
+    }
+
+
+    CThostFtdcQryDepthMarketDataField field = {0};
+    strcpy(field.InstrumentID, instrumentID.c_str());
+
+    return m_api->ReqQryDepthMarketData(&field, m_rid++);
 }

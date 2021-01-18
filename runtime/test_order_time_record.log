@@ -1,0 +1,46 @@
+[==========] Running 3 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 3 tests from TradeApiTest
+[ RUN      ] TradeApiTest.Order_Time_Record
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+1.8566e-05ns
+OnRtnOrder timestamp: 1610952373291122400ns
+OnRtnOrder, instrument: IF2102 , CFFEX买开2手, 价格: 0, 成交量: 0, 订单状态: 未知, 状态信息: 报单已提交, OrderRef:            1, OrderLocalID:        38561, OrderSysID: 
+OnRtnOrder timestamp: 1610952373293222809ns
+OnRtnOrder, instrument: IF2102 , CFFEX买开2手, 价格: 0, 成交量: 0, 订单状态: 已撤单, 状态信息: 79:已撤单报单被拒绝CFFEX:不被支持的报单类型, OrderRef:            1, OrderLocalID:        38561, OrderSysID: 
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.Order_Time_Record (4109 ms)
+[ RUN      ] TradeApiTest.Order_Time_Record2
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+beforeOrderInsert timestamp: 1610952377389661940ns
+afterOrderInsert timestamp: 1610952377389719189ns
+OnRtnOrder timestamp: 1610952377399917531ns
+OnRtnOrder, instrument: IF2102 , CFFEX买开2手, 价格: 0, 成交量: 0, 订单状态: 未知, 状态信息: 报单已提交, OrderRef:            1, OrderLocalID:        38565, OrderSysID: 
+OnRtnOrder timestamp: 1610952377402951017ns
+OnRtnOrder, instrument: IF2102 , CFFEX买开2手, 价格: 0, 成交量: 0, 订单状态: 已撤单, 状态信息: 79:已撤单报单被拒绝CFFEX:不被支持的报单类型, OrderRef:            1, OrderLocalID:        38565, OrderSysID: 
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.Order_Time_Record2 (4108 ms)
+[ RUN      ] TradeApiTest.Order_Time_Record3
+TradeFront connected!
+Auth Success!
+Login Success!
+SettlementInfoConfirm success!
+beforeOrderInsert timestamp: 1610952381498391371ns
+afterOrderInsert timestamp: 1610952381498453538ns
+OnRtnOrder timestamp: 1610952381510368723ns
+OnRtnOrder, instrument: cu2102 , SHFE买开2手, 价格: 1000, 成交量: 0, 订单状态: 未知, 状态信息: 报单已提交, OrderRef:            1, OrderLocalID:       440362, OrderSysID: 
+OnRtnOrder timestamp: 1610952381512755206ns
+OnRtnOrder, instrument: cu2102 , SHFE买开2手, 价格: 1000, 成交量: 0, 订单状态: 已撤单, 状态信息: 50:已撤单报单被拒绝SHFE:价格跌破跌停板, OrderRef:            1, OrderLocalID:       440362, OrderSysID: 
+MyCtpApi deConstruction!
+[       OK ] TradeApiTest.Order_Time_Record3 (4109 ms)
+[----------] 3 tests from TradeApiTest (12326 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test suite ran. (12326 ms total)
+[  PASSED  ] 3 tests.

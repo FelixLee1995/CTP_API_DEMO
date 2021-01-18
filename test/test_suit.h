@@ -3,6 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include "apiWrapper/ctp/MyCtpApi.h"
+#include "apiWrapper/ctp/MyMarketApi.h"
 
 #ifdef ENVSIMNOW
 const std::string brokerid = "9999";
@@ -10,6 +11,7 @@ const std::string userid = "123616";
 const std::string pwd = "nanase4ever";
 //const std::string frontAddr = "tcp://180.168.146.187:10100";
 const std::string frontAddr = "tcp://180.168.146.187:10130";
+const std::string marketfrontAddr = "tcp://180.168.146.187:10110";
 const std::string appid = "simnow_client_test";
 const std::string authcode = "0000000000000000";
 #endif 
@@ -53,5 +55,29 @@ class TradeApiTest: public testing::Test {
     }
 
     MyCtpApi * p_api;
+};
 
+
+class MdApiTest: public testing::Test {
+
+    protected:
+
+    virtual void SetUp() override {
+
+        p_api = new MyMarketApi(brokerid, userid, pwd, marketfrontAddr);
+        p_api->Init();
+        usleep(1000000);
+        EXPECT_EQ(p_api->GetConnectStatus(), true);
+  
+        p_api->ReqUserLogin();
+        usleep(1000000);
+        EXPECT_EQ(p_api->GetLoginStatus(), true);
+    };
+
+    virtual void TearDown() override {
+        delete p_api;
+        p_api = nullptr;
+    }
+
+    MyMarketApi * p_api;
 };

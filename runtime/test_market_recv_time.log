@@ -1,0 +1,35 @@
+hello test!
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MdApiTest
+[ RUN      ] MdApiTest.Subscribe
+TradeFront connected!
+Login Success!
+timestamp: 1610938656525248985ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38798
+timestamp: 1610938656743043790ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38800
+timestamp: 1610938657260493489ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38800
+timestamp: 1610938657727140924ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38800
+timestamp: 1610938658282096734ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38800
+timestamp: 1610938658765756207ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5473, Volume: 38801
+timestamp: 1610938659459254036ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.8, Volume: 38802
+timestamp: 1610938659764311760ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.8, Volume: 38804
+timestamp: 1610938660265780868ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.8, Volume: 38804
+timestamp: 1610938660755857499ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.8, Volume: 38804
+timestamp: 1610938661264895534ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.4, Volume: 38805
+timestamp: 1610938661767257407ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.4, Volume: 38812
+timestamp: 1610938662254989670ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.4, Volume: 38815
+timestamp: 1610938662748538369ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38817
+timestamp: 1610938663286702980ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38817
+timestamp: 1610938663786784467ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38817
+timestamp: 1610938664228441725ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38818
+timestamp: 1610938664740773740ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38818
+timestamp: 1610938665279465284ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5472.6, Volume: 38818
+timestamp: 1610938665784702671ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5471.6, Volume: 38820
+timestamp: 1610938666254949095ns, OnRtnMarketData, instrumentid: IF2102, lastPrice: 5471.6, Volume: 38820
+MyMarketApi deConstruction!
+[       OK ] MdApiTest.Subscribe (13002 ms)
+[----------] 1 test from MdApiTest (13002 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (13002 ms total)
+[  PASSED  ] 1 test.

@@ -1,5 +1,6 @@
 #include "apiWrapper/ctp/MyCtpSpi.h"
 #include <vector>
+#include <chrono>
 
 MyCtpSpi::MyCtpSpi(MyCtpApi *api): m_api_(api) {
 
@@ -20,13 +21,13 @@ std::string MyCtpSpi::ConvertOrderStatus(char orderStatus)
 	case THOST_FTDC_OST_PartTradedQueueing:
 		return "部分成交";
 	case THOST_FTDC_OST_NoTradeQueueing:
-		return "未成交";
+		return "δ???";
 	case THOST_FTDC_OST_Canceled:
-		return "已撤销";
+		return "已撤单";
 	case THOST_FTDC_OST_Unknown:
 		return "未知";
 	default:
-		return "非法的状态";
+		return "非法类型";
 	}
 }
 
@@ -131,14 +132,20 @@ void MyCtpSpi::OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField *
 
 void MyCtpSpi::OnRtnOrder(CThostFtdcOrderField *pOrder) 
 {
+    typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> nanoClock_type;
+
+    nanoClock_type tp = std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now());
+
+	std::cout << "OnRtnOrder timestamp: " << tp.time_since_epoch().count() << "ns" << std::endl;
+
     std::cout << "OnRtnOrder, instrument: " <<   pOrder->InstrumentID << " , " << pOrder->ExchangeID
         << (pOrder->Direction == '0' ?  "买" : "卖" )
         << (pOrder->CombOffsetFlag[0] == '0' ?  "开" : "平")
         << pOrder->VolumeTotalOriginal << "手, "
         << "价格: " << pOrder->LimitPrice
-        << ", 已成交手数: " << pOrder->VolumeTraded
-        << ", 状态:" << ConvertOrderStatus(pOrder->OrderStatus)
-        << ", 报单状态信息: " << pOrder->StatusMsg 
+        << ", 成交量: " << pOrder->VolumeTraded
+        << ", 订单状态: " << ConvertOrderStatus(pOrder->OrderStatus)
+        << ", 状态信息: " << pOrder->StatusMsg 
         << ", OrderRef: " << pOrder->OrderRef 
         << ", OrderLocalID: " << pOrder->OrderLocalID 
         << ", OrderSysID: " << pOrder->OrderSysID
@@ -148,6 +155,13 @@ void MyCtpSpi::OnRtnOrder(CThostFtdcOrderField *pOrder)
 
 void MyCtpSpi::OnErrRtnOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo)
 {
+
+    typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> nanoClock_type;
+
+    nanoClock_type tp = std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now());
+
+	std::cout << "OnErrRtnOrderInsert timestamp: " << tp.time_since_epoch().count() << "ns" << std::endl;
+
     if (pRspInfo&& pInputOrder) {
         std::cout << "OnErrRtnOrderInsert" <<  pInputOrder->InstrumentID << " , " << pInputOrder->ExchangeID
         << (pInputOrder->Direction == '0' ?  "买" : "卖" )
@@ -163,7 +177,15 @@ void MyCtpSpi::OnErrRtnOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThos
 
 void MyCtpSpi::OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
-       if (pRspInfo&& pInputOrder) {
+
+    typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> nanoClock_type;
+
+    nanoClock_type tp = std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now());
+
+    std::cout << "OnRspOrderInsert timestamp: " << tp.time_since_epoch().count() << "ns" << std::endl;
+
+    if (pRspInfo && pInputOrder)
+    {
         std::cout << "OnRspOrderInsert" <<  pInputOrder->InstrumentID << " , " << pInputOrder->ExchangeID
         << (pInputOrder->Direction == '0' ?  "买" : "卖" )
         << (pInputOrder->CombOffsetFlag[0] == '0' ?  "开" : "平")
@@ -182,6 +204,107 @@ void MyCtpSpi::OnRtnTrade(CThostFtdcTradeField *pTrade)
      std::cout << "OnRtnTrade, instrument: " <<   pTrade->InstrumentID << " , " << pTrade->ExchangeID
         << (pTrade->Direction == '0' ?  "买" : "卖" )
         << (pTrade->OffsetFlag == '0' ?  "开" : "平")
-        << "成交" << pTrade->Volume << "手, "
+        << "数量" << pTrade->Volume << "手, "
         << "价格: " << pTrade->Price  << std::endl; 
+}
+
+void MyCtpSpi::OnRspQryTrade(CThostFtdcTradeField *pTrade, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    if (pRspInfo && pRspInfo->ErrorID == 0)
+    {
+        std::cout << "OnRspQryTrade Success" << std::endl;
+        if (pTrade)
+        {
+            std::cout << "OnRspQryTrade, instrument: " << pTrade->InstrumentID << " , " << pTrade->ExchangeID
+                      << (pTrade->Direction == '0' ? "买" : "卖")
+                      << (pTrade->OffsetFlag == '0' ? "开" : "平")
+                      << "数量" << pTrade->Volume << "手, "
+                      << "价格: " << pTrade->Price << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "OnRspQryTrade Failed!" << std::endl;
+    }
+}
+
+void MyCtpSpi::OnRspQryOrder(CThostFtdcOrderField *pOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    if (pRspInfo && pRspInfo->ErrorID == 0)
+    {
+        std::cout << "OnRspQryOrder Success" << std::endl;
+        if (pOrder)
+        {
+            std::cout << "OnRspQryOrder, instrument: " << pOrder->InstrumentID << " , " << pOrder->ExchangeID
+                      << (pOrder->Direction == '0' ? "买" : "卖")
+                      << (pOrder->CombOffsetFlag[0] == '0' ? "开" : "平")
+                      << pOrder->VolumeTotalOriginal << "手, "
+                      << "价格: " << pOrder->LimitPrice
+                      << ", 成交量: " << pOrder->VolumeTraded
+                      << ", 订单状态: " << ConvertOrderStatus(pOrder->OrderStatus)
+                      << ", 状态信息: " << pOrder->StatusMsg
+                      << ", OrderRef: " << pOrder->OrderRef
+                      << ", OrderLocalID: " << pOrder->OrderLocalID
+                      << ", OrderSysID: " << pOrder->OrderSysID
+                      << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "OnRspQryOrder Failed!" << std::endl;
+    }
+}
+
+void MyCtpSpi::OnRspQryTradingAccount(CThostFtdcTradingAccountField *pTradingAccount, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    if (pRspInfo && pRspInfo->ErrorID == 0)
+    {
+        std::cout << "OnRspQryTradingAccount Success" << std::endl;
+        if (pTradingAccount)
+        {
+            std::cout << "OnRspQryTradingAccount, AccountID: " << pTradingAccount->AccountID
+                      << ", Balance: " << pTradingAccount->Balance
+                      << ", available: " << pTradingAccount->Available
+                      << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "OnRspQryTradingAccount Failed!" << std::endl;
+    }
+}
+
+void MyCtpSpi::OnRspQryInvestorPositionDetail(CThostFtdcInvestorPositionDetailField *pInvestorPositionDetail, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    if (pRspInfo && pRspInfo->ErrorID == 0)
+    {
+        std::cout << "OnRspQryInvestorPositionDetail Success" << std::endl;
+        if (pInvestorPositionDetail)
+        {
+            std::cout << "OnRspQryInvestorPositionDetail, InstrumentID: " << pInvestorPositionDetail->InstrumentID << " , " << pInvestorPositionDetail->ExchangeID
+                      << (pInvestorPositionDetail->Direction == '0' ? "买" : "卖")
+                      << pInvestorPositionDetail->Volume << "手, "
+                      << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "OnRspQryInvestorPositionDetail Failed!" << std::endl;
+    }
+}
+
+void MyCtpSpi::OnRspQryDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    if (pRspInfo && pRspInfo->ErrorID == 0)
+    {
+        std::cout << "OnRspQryDepthMarketData Success" << std::endl;
+        if (pDepthMarketData)
+        {
+            std::cout << "OnRspQryDepthMarketData, instrumentid: " << pDepthMarketData->InstrumentID << ", lastPrice: " << pDepthMarketData->LastPrice << ", Volume: " << pDepthMarketData->Volume << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "OnRspQryDepthMarketData Failed!" << std::endl;
+    }
 }

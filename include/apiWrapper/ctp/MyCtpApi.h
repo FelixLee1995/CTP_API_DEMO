@@ -64,6 +64,11 @@ class MyCtpApi {
         int ReqOrderInsert(const Order& order, OrderType);
         int ReqOrderAction();
 
+        int ReqQryTrade();
+        int ReqQryOrder();
+        int ReqQryTradingAccount();
+        int ReqQryPositionDetail();
+        int ReqQryDepthMarketData(const std::string& instrumentid);
 
         void Dispose();
 
