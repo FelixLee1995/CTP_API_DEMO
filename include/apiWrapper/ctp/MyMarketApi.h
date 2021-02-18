@@ -1,3 +1,6 @@
+#ifndef _MY_MARKET_API_H_
+#define _MY_MARKET_API_H_
+
 #pragma once
 #include "api/ctp/ThostFtdcMdApi.h"
 #include "apiWrapper/ctp/MyMarketSpi.h"
@@ -26,6 +29,8 @@ class MyMarketApi {
         bool GetConnectStatus(){ return m_front_connect_stautus.load();}
         bool GetLoginStatus(){return m_login_stautus;}
 
+        const char* GetTradingDay();
+
     private:
         const int SYS_OK = 0;
         const int SYS_FAIL = -1;
@@ -43,3 +48,5 @@ class MyMarketApi {
         MyMarketSpi* m_spi;
         friend class MyMarketSpi;
 };
+
+#endif

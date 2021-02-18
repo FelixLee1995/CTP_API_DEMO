@@ -1,3 +1,6 @@
+#ifndef _TEST_SUIT_H_
+#define _TEST_SUIT_H_
+
 #pragma once
 
 #include <iostream>
@@ -11,7 +14,9 @@ const std::string userid = "123616";
 const std::string pwd = "nanase4ever";
 //const std::string frontAddr = "tcp://180.168.146.187:10100";
 const std::string frontAddr = "tcp://180.168.146.187:10130";
-const std::string marketfrontAddr = "tcp://180.168.146.187:10110";
+//const std::string marketfrontAddr = "tcp://180.168.146.187:10110";
+const std::string marketfrontAddr = "tcp://127.0.0.1:7001";
+    
 const std::string appid = "simnow_client_test";
 const std::string authcode = "0000000000000000";
 #endif 
@@ -63,8 +68,8 @@ class MdApiTest: public testing::Test {
     protected:
 
     virtual void SetUp() override {
-
         p_api = new MyMarketApi(brokerid, userid, pwd, marketfrontAddr);
+
         p_api->Init();
         usleep(1000000);
         EXPECT_EQ(p_api->GetConnectStatus(), true);
@@ -81,3 +86,6 @@ class MdApiTest: public testing::Test {
 
     MyMarketApi * p_api;
 };
+
+
+#endif

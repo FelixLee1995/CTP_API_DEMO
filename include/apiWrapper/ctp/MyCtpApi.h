@@ -1,3 +1,6 @@
+#ifndef _MY_CTP_API_H_
+#define _MY_CTP_API_H_
+
 #pragma once
 #include "api/ctp/ThostFtdcTraderApi.h"
 #include "apiWrapper/ctp/MyCtpSpi.h"
@@ -96,3 +99,6 @@ class MyCtpApi {
         MyCtpSpi* m_spi;
         friend class MyCtpSpi;
 };
+
+
+#endif

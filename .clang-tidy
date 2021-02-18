@@ -1,0 +1,511 @@
+Checks: >
+  clang-analyzer-*,
+  abseil-*,
+  bugprone-*,
+  boost-use-to-string,
+  cert-*,
+  -cert-dcl16-c,
+  -cert-dcl59-cpp,
+  -cert-err58-cpp,
+  concurrency-*,
+  cppcoreguidelines-avoid-goto,
+  cppcoreguidelines-avoid-non-const-global-variables,
+  cppcoreguidelines-narrowing-conversions,
+  cppcoreguidelines-slicing,
+  cppcoreguidelines-special-member-functions,
+  google-default-arguments,
+  google-explicit-constructor,
+  google-readability-casting,
+  google-runtime-operator,
+  google-runtime-int,
+  -hicpp-avoid-c-arrays,
+  hicpp-exception-baseclass,
+  hicpp-multiway-paths-covered,
+  -hicpp-named-parameter,
+  hicpp-signed-bitwise,
+  -hicpp-uppercase-literal-suffix,
+  misc-*,
+  modernize-*,
+  -modernize-avoid-c-arrays,
+  -modernize-use-trailing-return-type,
+  -modernize-use-using,
+  performance-*,
+  readability-*,
+  -readability-implicit-bool-conversion,
+  -readability-named-parameter,
+  -readability-redundant-access-specifiers,
+  -readability-uppercase-literal-suffix
+
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: false
+FormatStyle: file
+CheckOptions:
+  - key: abseil-string-find-str-contains.IncludeStyle
+    value: google
+  - key: bugprone-dangling-handle.HandleClasses
+    value: 'std::basic_string_view;std::experimental::basic_string_view;std::span;gsl::span'
+  - key: bugprone-signed-char-misuse.CharTypdefsToIgnore
+    value: 'int8_t'
+  - key: bugprone-suspicious-string-compare.WarnOnImplicitComparison
+    value: '0'
+  - key: bugprone-suspicious-string-compare.WarnOnLogicalNotComparison
+    value: '0'
+  - key: bugprone-unhandled-self-assignment.WarnOnlyIfThisHasSuspiciousField
+    value: '0'
+  - key: cert-oop11-cpp.IncludeStyle
+    value: google
+  - key: cert-oop54-cpp.WarnOnlyIfThisHasSuspiciousField
+    value: '0'
+  - key: cert-str34-c.CharTypdefsToIgnore
+    value: 'int8_t'
+  - key: cert-str34-c.DiagnoseSignedUnsignedCharComparisons
+    value: '1'
+  - key: cppcoreguidelines-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: '1'
+  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: '1'
+  - key: misc-non-private-member-variables-in-classes.IgnorePublicMemberVariables
+    value: '0'
+  - key: modernize-loop-convert.NamingStyle
+    value: CamelCase
+  - key: modernize-make-shared.IncludeStyle
+    value: google
+  - key: modernize-make-unique.IncludeStyle
+    value: google
+  - key: modernize-pass-by-value.IncludeStyle
+    value: google
+  - key: modernize-replace-auto-ptr.IncludeStyle
+    value: google
+  - key: modernize-replace-random-shuffle.IncludeStyle
+    value: google
+  - key: modernize-use-auto.MinTypeNameLength
+    value: '5'
+  - key: modernize-use-auto.RemoveStars
+    value: '0'
+  - key: modernize-use-override.IgnoreDestructors
+    value: '1'
+  - key: performance-move-constructor-init.IncludeStyle
+    value: google
+  - key: performance-type-promotion-in-math-fn.IncludeStyle
+    value: google
+  - key: performance-unnecessary-value-param.IncludeStyle
+    value: google
+  - key: readability-magic-numbers.IgnoredIntegerValues
+    value: '-1,1'
+  - key: readability-magic-numbers.IgnorePowersOf2IntegerValues
+    value: '1'
+  - key: readability-magic-numbers.IgnoredFloatingPointValues
+    value: '-1.0,1.0'
+  - key: readability-braces-around-statements.ShortStatementLines
+    value: '0'
+  - key: readability-identifier-naming.AggressiveDependentMemberLookup
+    value: '1'
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: 'UPPER_CASE'
+  - key: readability-identifier-naming.MacroDefinitionPrefix
+    value: ''
+  - key: readability-identifier-naming.MacroDefinitionIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.MacroDefinitionSuffix
+    value: ''
+  - key: readability-identifier-naming.NamespaceCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.NamespacePrefix
+    value: ''
+  - key: readability-identifier-naming.NamespaceSuffix
+    value: ''
+  - key: readability-identifier-naming.NamespaceIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.InlineNamespaceCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.InlineNamespacePrefix
+    value: ''
+  - key: readability-identifier-naming.InlineNamespaceSuffix
+    value: ''
+  - key: readability-identifier-naming.InlineNamespaceIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.FunctionCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.FunctionPrefix
+    value: ''
+  - key: readability-identifier-naming.FunctionSuffix
+    value: ''
+  - key: readability-identifier-naming.FunctionIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.GlobalFunctionCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.GlobalFunctionPrefix
+    value: ''
+  - key: readability-identifier-naming.GlobalFunctionSuffix
+    value: ''
+  - key: readability-identifier-naming.GlobalFunctionIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ConstexprFunctionCase
+    value: ''
+  - key: readability-identifier-naming.ConstexprFunctionPrefix
+    value: ''
+  - key: readability-identifier-naming.ConstexprFunctionSuffix
+    value: ''
+  - key: readability-identifier-naming.ConstexprFunctionIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.StructCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.StructPrefix
+    value: ''
+  - key: readability-identifier-naming.StructSuffix
+    value: ''
+  - key: readability-identifier-naming.StructIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ClassCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ClassPrefix
+    value: 'C'
+  - key: readability-identifier-naming.ClassSuffix
+    value: ''
+  - key: readability-identifier-naming.ClassIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.AbstractClassCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.AbstractClassPrefix
+    value: 'C'
+  - key: readability-identifier-naming.AbstractClassSuffix
+    value: ''
+  - key: readability-identifier-naming.AbstractClassIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ClassConstantCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ClassConstantPrefix
+    value: ''
+  - key: readability-identifier-naming.ClassConstantSuffix
+    value: ''
+  - key: readability-identifier-naming.ClassConstantIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.UnionCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.UnionPrefix
+    value: ''
+  - key: readability-identifier-naming.UnionSuffix
+    value: ''
+  - key: readability-identifier-naming.UnionIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.EnumCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.EnumPrefix
+    value: ''
+  - key: readability-identifier-naming.EnumSuffix
+    value: ''
+  - key: readability-identifier-naming.EnumIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.EnumConstantCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.EnumConstantPrefix
+    value: ''
+  - key: readability-identifier-naming.EnumConstantSuffix
+    value: ''
+  - key: readability-identifier-naming.EnumConstantIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ScopedEnumConstantCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ScopedEnumConstantPrefix
+    value: ''
+  - key: readability-identifier-naming.ScopedEnumConstantSuffix
+    value: ''
+  - key: readability-identifier-naming.ScopedEnumConstantIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.TypedefCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.TypedefPrefix
+    value: ''
+  - key: readability-identifier-naming.TypedefSuffix
+    value: '_t'
+  - key: readability-identifier-naming.TypedefIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.TypeAliasCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.TypeAliasPrefix
+    value: ''
+  - key: readability-identifier-naming.TypeAliasSuffix
+    value: '_t'
+  - key: readability-identifier-naming.TypeAliasIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.MethodCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.MethodPrefix
+    value: ''
+  - key: readability-identifier-naming.MethodSuffix
+    value: ''
+  - key: readability-identifier-naming.MethodIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ConstexprMethodCase
+    value: ''
+  - key: readability-identifier-naming.ConstexprMethodPrefix
+    value: ''
+  - key: readability-identifier-naming.ConstexprMethodSuffix
+    value: ''
+  - key: readability-identifier-naming.ConstexprMethodIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ClassMethodCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ClassMethodPrefix
+    value: ''
+  - key: readability-identifier-naming.ClassMethodSuffix
+    value: ''
+  - key: readability-identifier-naming.ClassMethodIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.PrivateMethodCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.PrivateMethodPrefix
+    value: ''
+  - key: readability-identifier-naming.PrivateMethodSuffix
+    value: ''
+  - key: readability-identifier-naming.PrivateMethodIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ProtectedMethodCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ProtectedMethodPrefix
+    value: ''
+  - key: readability-identifier-naming.ProtectedMethodSuffix
+    value: ''
+  - key: readability-identifier-naming.ProtectedMethodIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.PublicMethodCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.PublicMethodPrefix
+    value: ''
+  - key: readability-identifier-naming.PublicMethodSuffix
+    value: ''
+  - key: readability-identifier-naming.PublicMethodIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.VirtualMethodCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.VirtualMethodPrefix
+    value: ''
+  - key: readability-identifier-naming.VirtualMethodSuffix
+    value: ''
+  - key: readability-identifier-naming.VirtualMethodIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ParameterCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.ParameterPrefix
+    value: ''
+  - key: readability-identifier-naming.ParameterSuffix
+    value: ''
+  - key: readability-identifier-naming.ParameterIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.PointerParameterCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.PointerParameterPrefix
+    value: ''
+  - key: readability-identifier-naming.PointerParameterSuffix
+    value: ''
+  - key: readability-identifier-naming.PointerParameterIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ConstantParameterCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.ConstantParameterPrefix
+    value: ''
+  - key: readability-identifier-naming.ConstantParameterSuffix
+    value: ''
+  - key: readability-identifier-naming.ConstantParameterIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ConstantPointerParameterCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.ConstantPointerParameterPrefix
+    value: ''
+  - key: readability-identifier-naming.ConstantPointerParameterSuffix
+    value: ''
+  - key: readability-identifier-naming.ConstantPointerParameterIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ParameterPackCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ParameterPackPrefix
+    value: ''
+  - key: readability-identifier-naming.ParameterPackSuffix
+    value: ''
+  - key: readability-identifier-naming.ParameterPackIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.TemplateParameterCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.TemplateParameterPrefix
+    value: ''
+  - key: readability-identifier-naming.TemplateParameterSuffix
+    value: ''
+  - key: readability-identifier-naming.TemplateParameterIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.TypeTemplateParameterCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.TypeTemplateParameterPrefix
+    value: ''
+  - key: readability-identifier-naming.TypeTemplateParameterSuffix
+    value: ''
+  - key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ValueTemplateParameterCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ValueTemplateParameterPrefix
+    value: ''
+  - key: readability-identifier-naming.ValueTemplateParameterSuffix
+    value: ''
+  - key: readability-identifier-naming.ValueTemplateParameterIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.TemplateTemplateParameterCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.TemplateTemplateParameterPrefix
+    value: ''
+  - key: readability-identifier-naming.TemplateTemplateParameterSuffix
+    value: ''
+  - key: readability-identifier-naming.TemplateTemplateParameterIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.MemberCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.MemberPrefix
+    value: ''
+  - key: readability-identifier-naming.MemberSuffix
+    value: ''
+  - key: readability-identifier-naming.MemberIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ClassMemberCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ClassMemberPrefix
+    value: ''
+  - key: readability-identifier-naming.ClassMemberSuffix
+    value: 'm_'
+  - key: readability-identifier-naming.ClassMemberIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ConstantMemberCase
+    value: ''
+  - key: readability-identifier-naming.ConstantMemberPrefix
+    value: ''
+  - key: readability-identifier-naming.ConstantMemberSuffix
+    value: ''
+  - key: readability-identifier-naming.ConstantMemberIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.PrivateMemberPrefix
+    value: 'm_'
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: ''
+  - key: readability-identifier-naming.PrivateMemberIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ProtectedMemberCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ProtectedMemberPrefix
+    value: 'm_'
+  - key: readability-identifier-naming.ProtectedMemberSuffix
+    value: ''
+  - key: readability-identifier-naming.ProtectedMemberIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.PublicMemberCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.PublicMemberPrefix
+    value: ''
+  - key: readability-identifier-naming.PublicMemberSuffix
+    value: ''
+  - key: readability-identifier-naming.PublicMemberIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.VariableCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.VariablePrefix
+    value: ''
+  - key: readability-identifier-naming.VariableSuffix
+    value: ''
+  - key: readability-identifier-naming.VariableIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.GlobalVariableCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.GlobalVariablePrefix
+    value: ''
+  - key: readability-identifier-naming.GlobalVariableSuffix
+    value: ''
+  - key: readability-identifier-naming.GlobalVariableIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: ''
+  - key: readability-identifier-naming.ConstexprVariablePrefix
+    value: ''
+  - key: readability-identifier-naming.ConstexprVariableSuffix
+    value: ''
+  - key: readability-identifier-naming.ConstexprVariableIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.ConstantCase
+    value: ''
+  - key: readability-identifier-naming.ConstantPrefix
+    value: ''
+  - key: readability-identifier-naming.ConstantSuffix
+    value: ''
+  - key: readability-identifier-naming.ConstantIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.LocalVariableCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.LocalVariablePrefix
+    value: ''
+  - key: readability-identifier-naming.LocalVariableSuffix
+    value: ''
+  - key: readability-identifier-naming.LocalVariableIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.LocalConstantCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.LocalConstantPrefix
+    value: ''
+  - key: readability-identifier-naming.LocalConstantSuffix
+    value: ''
+  - key: readability-identifier-naming.LocalConstantIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.LocalPointerCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.LocalPointerPrefix
+    value: ''
+  - key: readability-identifier-naming.LocalPointerSuffix
+    value: ''
+  - key: readability-identifier-naming.LocalPointerIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.LocalConstantPointerCase
+    value: 'camelBack'
+  - key: readability-identifier-naming.LocalConstantPointerPrefix
+    value: ''
+  - key: readability-identifier-naming.LocalConstantPointerSuffix
+    value: ''
+  - key: readability-identifier-naming.LocalConstantPointerIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.GlobalConstantCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.GlobalConstantPrefix
+    value: ''
+  - key: readability-identifier-naming.GlobalConstantSuffix
+    value: ''
+  - key: readability-identifier-naming.GlobalConstantIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.GlobalPointerCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.GlobalPointerPrefix
+    value: ''
+  - key: readability-identifier-naming.GlobalPointerSuffix
+    value: ''
+  - key: readability-identifier-naming.GlobalPointerIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.GlobalConstantPointerCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.GlobalConstantPointerPrefix
+    value: ''
+  - key: readability-identifier-naming.GlobalConstantPointerSuffix
+    value: ''
+  - key: readability-identifier-naming.GlobalConstantPointerIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.StaticVariableCase
+    value: ''
+  - key: readability-identifier-naming.StaticVariablePrefix
+    value: ''
+  - key: readability-identifier-naming.StaticVariableSuffix
+    value: ''
+  - key: readability-identifier-naming.StaticVariableIgnoredRegexp
+    value: ''
+  - key: readability-identifier-naming.StaticConstantCase
+    value: ''
+  - key: readability-identifier-naming.StaticConstantPrefix
+    value: ''
+  - key: readability-identifier-naming.StaticConstantSuffix
+    value: ''
+  - key: readability-identifier-naming.StaticConstantIgnoredRegexp
+    value: ''

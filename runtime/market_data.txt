@@ -1,0 +1,5 @@
+setrlimit success!
+Hello World
+CTP API VERSION is v6.3.19_P1_20200106 15:21:32
+TradingDay is 20210120CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7ff050000b68][1189150721][ 4097]
+TradeFront disconnected!

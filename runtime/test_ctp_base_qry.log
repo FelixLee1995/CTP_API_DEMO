@@ -8,7 +8,7 @@ Login Success!
 SettlementInfoConfirm success!
 OnRspQryTrade Failed!
 MyCtpApi deConstruction!
-[       OK ] TradeApiTest.QryTrade (4114 ms)
+[       OK ] TradeApiTest.QryTrade (4107 ms)
 [ RUN      ] TradeApiTest.QryOrder
 TradeFront connected!
 Auth Success!
@@ -32,7 +32,7 @@ Login Success!
 SettlementInfoConfirm success!
 OnRspQryInvestorPositionDetail Failed!
 MyCtpApi deConstruction!
-[       OK ] TradeApiTest.QryPositionDetail (4110 ms)
+[       OK ] TradeApiTest.QryPositionDetail (4107 ms)
 [ RUN      ] TradeApiTest.QryMarketData
 TradeFront connected!
 Auth Success!
@@ -41,8 +41,8 @@ SettlementInfoConfirm success!
 pDepthMarketData Failed!
 MyCtpApi deConstruction!
 [       OK ] TradeApiTest.QryMarketData (4107 ms)
-[----------] 5 tests from TradeApiTest (20545 ms total)
+[----------] 5 tests from TradeApiTest (20535 ms total)
 
 [----------] Global test environment tear-down
-[==========] 5 tests from 1 test suite ran. (20545 ms total)
+[==========] 5 tests from 1 test suite ran. (20536 ms total)
 [  PASSED  ] 5 tests.

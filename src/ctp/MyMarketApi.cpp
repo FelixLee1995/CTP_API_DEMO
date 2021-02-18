@@ -64,7 +64,7 @@ int MyMarketApi::ReqUserLogin() {
     memcpy(&reqUserLoginField.UserID, m_userid.c_str(), sizeof(reqUserLoginField.UserID));
     memcpy(&reqUserLoginField.Password, m_pwd.c_str(), sizeof(reqUserLoginField.Password));
 
-    m_api->ReqUserLogin(&reqUserLoginField, m_rid++);
+    m_api->ReqUserLogin(&reqUserLoginField, 0);
 
     return SYS_OK;
 }
@@ -95,4 +95,9 @@ int MyMarketApi::ReqUnSubscribeMarketData(const std::string& instrumentID) {
     delete []instrument;
 
     return res;
+}
+
+const char* MyMarketApi::GetTradingDay()
+{
+    return m_api->GetTradingDay();
 }

@@ -1,3 +1,6 @@
+#ifndef _MY_MARKET_SPI_H_
+#define _MY_MARKET_SPI_H_
+
 #pragma once
 #include "api/ctp/ThostFtdcMdApi.h"
 #include "apiWrapper/ctp/MyMarketApi.h"
@@ -34,3 +37,5 @@ class MyMarketSpi: public CThostFtdcMdSpi {
     private:
         MyMarketApi* m_api_;
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef _MY_CTP_SPI_H_
+#define _MY_CTP_SPI_H_
+
 #pragma once
 #include "api/ctp/ThostFtdcTraderApi.h"
 #include "apiWrapper/ctp/MyCtpApi.h"
@@ -81,3 +84,6 @@ class MyCtpSpi: public CThostFtdcTraderSpi {
     private:
         MyCtpApi* m_api_;
 };
+
+
+#endif

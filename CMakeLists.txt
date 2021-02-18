@@ -42,7 +42,7 @@ ADD_EXECUTABLE(ctp_base_qry_test ${TEST_SRCS3})
 
 target_link_libraries(ctpdemo thostmduserapi_se thosttraderapi_se)
 target_link_libraries(orderinserttest thosttraderapi_se thostmduserapi_se gtest pthread)
-target_link_libraries(ctp_md_sub_test thosttraderapi_se thostmduserapi_se gtest pthread)
+target_link_libraries(ctp_md_sub_test thosttraderapi_se thostmduserapi_se_15 gtest pthread)
 target_link_libraries(ctp_order_time_record_test thosttraderapi_se thostmduserapi_se gtest pthread)
 target_link_libraries(ctp_base_qry_test thosttraderapi_se thostmduserapi_se gtest pthread)
 

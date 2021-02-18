@@ -1,0 +1,131 @@
+---
+Language: Cpp
+AccessModifierOffset: -4
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveMacros: true
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Left
+AlignOperands: false
+AlignTrailingComments: false
+AllowAllArgumentsOnNextLine: true
+AllowAllConstructorInitializersOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortLambdasOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: true
+BinPackParameters: true
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Allman
+BreakBeforeInheritanceComma: false
+BreakInheritanceList: BeforeColon
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializersBeforeComma: false
+BreakConstructorInitializers: BeforeColon
+BreakAfterJavaFieldAnnotations: false
+BreakStringLiterals: true
+ColumnLimit: 124 # 132字符的标准终端或A4横向打印，剔除前导的行号(VIM中行号占了8字符)
+CommentPragmas: '^ IWYU pragma:'
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: true
+DeriveLineEnding: false
+DerivePointerAlignment: false
+DisableFormat: false
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: true
+ForEachMacros:
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
+IncludeBlocks:   Preserve
+IncludeCategories:
+  # Linux和GNU基础头文件
+  - Regex:           '^<(asm|asm-generic|bits)/.*\.h>'
+    Priority:        1
+  # 标准C头文件
+  - Regex:           '^<(assert|complex|ctype|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|stdalign|stdarg|stdatomic|stdbool|stddef|stdint|stdio|stdlib|stdnoreturn|string|tgmath|threads)\.h>'
+    Priority:        1
+  # 标准C++中C兼容头文件
+  - Regex:           '^<(cassert|cctype|cerrno|cfenv|cfloat|cinttypes|climits|clocale|cmath|csetjmp|csignal|cstdarg|cstddef|cstdint|cstdio|cstdlib|cstring|ctime|cuchar|cwchar|cwctype|ccomplex|ctgmath|ciso646|cstdalign|cstdbool)>'
+    Priority:        2
+  # POSIX和Linux下的标准头文件
+  - Regex:           '^<(((arpa|linux|march|net|netinet|sys)/.*)|a\.out|aliases|alloca|ar|argp|argz|byteswap|const|cpio|crypt|dirent|dlfcn|elf|endian|envz|err|error|execinfo|fcntl|features|fmtmsg|fnmatch|fpu_control|fstab|fts|ftw|gconv|gdbm|getopt|glob|gnu-versions|grp|gshadow|iconv|iee754|ifaddrs|langinfo|lastlog|libgen|libintl|libio|link|mcheck|memory|mntent|monetary|mqueue|ndbm|netapi|netdb|nl_types|nss|obstack|paths|poll|printf|pthread|pty|pwd|re_comp|regex|regexp|resolv|sched|search|semaphore|sgtty|shadow|spawn|stab|stdio_ext|strings|stropts|syscall|sysexits|syslog|tar|termio|termios|thread_db|time|trace|ttyent|ucontext|ulimit|unistd|ustat|utime|utmp|utmpx|values|wait|wordexp|xlocale)\.h>'
+    Priority:        1
+  # Windows下的标准头文件
+  - Regex:           '^(.[Ww][Ii][Nn].*)|(<(conio|corecrt|corecrt_io|corecrt_malloc|corecrt_math|corecrt_math_defines|corecrt_memcpy_s|corecrt_memory|corecrt_search|corecrt_share|corecrt_startup|corecrt_stdio_config|corecrt_terminate|corecrt_wconio|corecrt_wctype|corecrt_wdirect|corecrt_wio|corecrt_wprocess|corecrt_wstdio|corecrt_wstdlib|corecrt_wstring|corecrt_wtime|crtdbg|direct|dos|fcntl|fpieee|io|malloc|mbctype|mbstring|memory|minmax|new|process|safeint|safeint_internal|search|share|tchar|time|uchar|wchar|wctype))\.h'
+    Priority:        1
+  # 标准C++头文件
+  - Regex:           '^<(algorithm|any|array|atomic|barrier|bit|bitset|charconv|chrono|codecvt|compare|complex|concepts|condition_variable|coroutine|deque|exception|execution|filesystem|format|forward_list|fstream|functional|future|initializer_list|iomanip|ios|iosfwd|iostream|istream|iterator|latch|limits|list|locale|map|memory|memory_resource|mutex|new|numbers|numeric|optional|ostream|queue|random|ranges|ratio|regex|scoped_allocator|semaphore|set|shared_mutex|source_location|span|sstream|stack|stdexcept|stop_token|streambuf|string|string_view|strstream|syncstream|system_error|thread|tuple|type_traits|typeindex|typeinfo|unordered_map|unordered_set|utility|valarray|variant|vector|version)>'
+    Priority:        2
+  - Regex:           '^<.*'
+    Priority:        3
+  # 其他文件
+  - Regex:           '.*'
+    Priority:        4
+IncludeIsMainRegex: '([-_](test|unittest|Test))?$'
+IncludeIsMainSourceRegex: ''
+IndentCaseLabels: true
+IndentGotoLabels: true
+IndentPPDirectives: None
+IndentWidth: 4
+IndentWrappedFunctionNames: false
+JavaScriptQuotes: Leave
+JavaScriptWrapImports: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+MacroBlockBegin: ''
+MacroBlockEnd: ''
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: None
+ObjCBinPackProtocolList: Auto
+ObjCBlockIndentWidth: 4
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: false
+PenaltyBreakAssignment: 10
+PenaltyBreakBeforeFirstCallParameter: 20
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 180
+PenaltyBreakString: 1500
+PenaltyBreakTemplateDeclaration: 80
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 300
+PointerAlignment: Right
+ReflowComments: false
+SortIncludes: true
+SortUsingDeclarations: true
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: false
+SpacesInConditionalStatement: false
+SpacesInContainerLiterals: false
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceBeforeSquareBrackets: false
+Standard: c++17
+StatementMacros:
+  - Q_UNUSED
+  - QT_REQUIRE_VERSION
+TabWidth: 4
+UseCRLF: false
+UseTab: Never
