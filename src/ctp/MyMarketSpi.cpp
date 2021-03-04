@@ -56,6 +56,11 @@ void MyMarketSpi::OnRspSubMarketData(
             std::cout << "subscribe success: " << pSpecificInstrument->InstrumentID << std::endl;
         }
     }
+
+    if (!pSpecificInstrument)
+    {
+        std::cout << "OnRspSubMarketData  Failed,  no pSpecificInstrument" << std::endl;
+    }
 }
 
 void MyMarketSpi::OnRspUnSubMarketData(

@@ -308,3 +308,31 @@ void MyCtpSpi::OnRspQryDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMar
         std::cout << "OnRspQryDepthMarketData Failed!" << std::endl;
     }
 }
+
+
+void MyCtpSpi::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+
+    if (pInstrument)
+    {
+        char ProductClass;
+        if (pInstrument->ProductClass == THOST_FTDC_PC_Futures)
+        {
+            ProductClass = 'F';
+        }
+        else   if (pInstrument->ProductClass == THOST_FTDC_PC_Options)
+        {
+            ProductClass = 'O';
+        }
+        else   if (pInstrument->ProductClass == THOST_FTDC_PC_Combination)
+        {
+            ProductClass = 'C';
+        }
+        
+
+
+        std::cout << pInstrument->InstrumentID << " " <<  ProductClass << " " << pInstrument->ExpireDate << " " << pInstrument->ExchangeID << std::endl;
+    }
+
+
+}

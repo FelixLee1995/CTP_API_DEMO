@@ -1,12 +1,12 @@
-#include "test_suit.h"
+#include "test_suit_trade.h"
 
 TEST_F(TradeApiTest, Order_CFFEX_Limit) {
     
     Order order;
-    order.instrumentid = "IF2102";
+    order.instrumentid = "IF2104";
     order.direction = '0';
     order.offsetflag = '0';
-    order.limitPrice = 2102;
+    order.limitPrice = 2104;
     order.volumeTotalOrigin = 2;
 
     
@@ -19,7 +19,7 @@ TEST_F(TradeApiTest, Order_CFFEX_Limit) {
 TEST_F(TradeApiTest, Order_CFFEX_Market) {
     
     Order order;
-    order.instrumentid = "IF2102";
+    order.instrumentid = "IF2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -33,7 +33,7 @@ TEST_F(TradeApiTest, Order_CFFEX_Market) {
 TEST_F(TradeApiTest, Order_CFFEX_LimitToMarket) {
     
     Order order;
-    order.instrumentid = "IF2102";
+    order.instrumentid = "IF2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -47,7 +47,7 @@ TEST_F(TradeApiTest, Order_CFFEX_LimitToMarket) {
 TEST_F(TradeApiTest, Order_CFFEX_FAK) {
     
     Order order;
-    order.instrumentid = "IF2102";
+    order.instrumentid = "IF2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -60,7 +60,7 @@ TEST_F(TradeApiTest, Order_CFFEX_FAK) {
 TEST_F(TradeApiTest, Order_CFFEX_FOK) {
     
     Order order;
-    order.instrumentid = "IF2102";
+    order.instrumentid = "IF2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -78,10 +78,10 @@ TEST_F(TradeApiTest, Order_CFFEX_FOK) {
 TEST_F(TradeApiTest, Order_SHFE_Limit) {
     
     Order order;
-    order.instrumentid = "cu2102";
+    order.instrumentid = "cu2104";
     order.direction = '0';
     order.offsetflag = '0';
-    order.limitPrice = 2102;
+    order.limitPrice = 2104;
     order.volumeTotalOrigin = 2;
 
     
@@ -94,7 +94,7 @@ TEST_F(TradeApiTest, Order_SHFE_Limit) {
 TEST_F(TradeApiTest, Order_SHFE_Market) {
     
     Order order;
-    order.instrumentid = "cu2102";
+    order.instrumentid = "cu2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -108,7 +108,7 @@ TEST_F(TradeApiTest, Order_SHFE_Market) {
 TEST_F(TradeApiTest, Order_SHFE_LimitToMarket) {
     
     Order order;
-    order.instrumentid = "cu2102";
+    order.instrumentid = "cu2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -122,7 +122,7 @@ TEST_F(TradeApiTest, Order_SHFE_LimitToMarket) {
 TEST_F(TradeApiTest, Order_SHFE_FAK) {
     
     Order order;
-    order.instrumentid = "cu2102";
+    order.instrumentid = "cu2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -135,7 +135,7 @@ TEST_F(TradeApiTest, Order_SHFE_FAK) {
 TEST_F(TradeApiTest, Order_SHFE_FOK) {
     
     Order order;
-    order.instrumentid = "cu2102";
+    order.instrumentid = "cu2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -152,10 +152,10 @@ TEST_F(TradeApiTest, Order_SHFE_FOK) {
 TEST_F(TradeApiTest, Order_DCE_Limit) {
     
     Order order;
-    order.instrumentid = "i2102";
+    order.instrumentid = "i2104";
     order.direction = '0';
     order.offsetflag = '0';
-    order.limitPrice = 2102;
+    order.limitPrice = 2104;
     order.volumeTotalOrigin = 2;
 
     
@@ -168,7 +168,7 @@ TEST_F(TradeApiTest, Order_DCE_Limit) {
 TEST_F(TradeApiTest, Order_DCE_Market) {
     
     Order order;
-    order.instrumentid = "i2102";
+    order.instrumentid = "i2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -182,7 +182,7 @@ TEST_F(TradeApiTest, Order_DCE_Market) {
 TEST_F(TradeApiTest, Order_DCE_LimitToMarket) {
     
     Order order;
-    order.instrumentid = "i2102";
+    order.instrumentid = "i2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -196,7 +196,7 @@ TEST_F(TradeApiTest, Order_DCE_LimitToMarket) {
 TEST_F(TradeApiTest, Order_DCE_FAK) {
     
     Order order;
-    order.instrumentid = "i2102";
+    order.instrumentid = "i2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -209,7 +209,7 @@ TEST_F(TradeApiTest, Order_DCE_FAK) {
 TEST_F(TradeApiTest, Order_DCE_FOK) {
     
     Order order;
-    order.instrumentid = "i2102";
+    order.instrumentid = "i2104";
     order.direction = '0';
     order.offsetflag = '0';
     order.volumeTotalOrigin = 2;
@@ -228,7 +228,7 @@ TEST_F(TradeApiTest, Order_ZCE_Limit) {
     order.instrumentid = "CF105";
     order.direction = '0';
     order.offsetflag = '0';
-    order.limitPrice = 2102;
+    order.limitPrice = 2104;
     order.volumeTotalOrigin = 2;
 
     
@@ -301,7 +301,7 @@ TEST_F(TradeApiTest, Order_INE_Limit) {
     order.instrumentid = "lu2104";
     order.direction = '0';
     order.offsetflag = '0';
-    order.limitPrice = 2102;
+    order.limitPrice = 2104;
     order.volumeTotalOrigin = 2;
 
     

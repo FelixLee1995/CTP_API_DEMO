@@ -72,6 +72,7 @@ class MyCtpApi {
         int ReqQryTradingAccount();
         int ReqQryPositionDetail();
         int ReqQryDepthMarketData(const std::string& instrumentid);
+        int ReqQryInstrument();
 
         void Dispose();
 

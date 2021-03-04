@@ -6,6 +6,7 @@
 #include "apiWrapper/ctp/MyMarketSpi.h"
 #include <iostream>
 #include <cstring>
+#include <vector>
 #include <atomic>
 
 class MyMarketSpi;
@@ -22,6 +23,7 @@ class MyMarketApi {
         int ReqUserLogin(); 
 
         int ReqSubscribeMarketData(const std::string& instrumentID);
+        int ReqSubscribeMarketData(const std::vector<std::string> instrVec);
         int ReqUnSubscribeMarketData(const std::string& instrumentID);
 
         void Dispose();

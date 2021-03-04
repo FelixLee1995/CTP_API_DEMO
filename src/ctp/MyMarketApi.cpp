@@ -1,27 +1,16 @@
 #include "apiWrapper/ctp/MyMarketApi.h"
 
-MyMarketApi::MyMarketApi(std::string brokerid, std::string userid, std::string pwd, std::string frontAddr):   
-    m_rid(1),
-    m_brokerid(brokerid),
-    m_userid(userid),
-    m_pwd(pwd), 
-    m_front_addr(frontAddr),
-    m_api(nullptr),
-    m_spi(nullptr),
-    m_front_connect_stautus(false),
-    m_login_stautus(false)
+MyMarketApi::MyMarketApi(std::string brokerid, std::string userid, std::string pwd, std::string frontAddr)
+    : m_rid(1), m_brokerid(brokerid), m_userid(userid), m_pwd(pwd), m_front_addr(frontAddr), m_api(nullptr), m_spi(nullptr),
+      m_front_connect_stautus(false), m_login_stautus(false)
 {
-    
 }
 
+void MyMarketApi::Dispose() {}
 
-void MyMarketApi::Dispose() {
-
-}
-
-
-MyMarketApi::~MyMarketApi() {
-    std::cout <<  "MyMarketApi deConstruction!" << std::endl;
+MyMarketApi::~MyMarketApi()
+{
+    std::cout << "MyMarketApi deConstruction!" << std::endl;
 
     if (m_api)
     {
@@ -37,8 +26,8 @@ MyMarketApi::~MyMarketApi() {
     }
 }
 
-
-void MyMarketApi::Init() {
+void MyMarketApi::Init()
+{
     m_api = CThostFtdcMdApi::CreateFtdcMdApi();
     m_spi = new MyMarketSpi(this);
     m_api->RegisterSpi(m_spi);
@@ -48,12 +37,11 @@ void MyMarketApi::Init() {
     m_api->Init();
 }
 
-
-int MyMarketApi::ReqUserLogin() {
-
+int MyMarketApi::ReqUserLogin()
+{
     auto check_flag = m_front_connect_stautus.load();
 
-    if (!check_flag) 
+    if (!check_flag)
     {
         std::cout << "please connect fisrt!" << std::endl;
         return SYS_FAIL;
@@ -69,35 +57,68 @@ int MyMarketApi::ReqUserLogin() {
     return SYS_OK;
 }
 
+int MyMarketApi::ReqSubscribeMarketData(const std::vector<std::string> instrVec) 
+{
 
-int MyMarketApi::ReqSubscribeMarketData(const std::string& instrumentID) {
+
+    auto check_flag = m_login_stautus.load();
+    if (!check_flag) {
+        std::cout << "please login first!" << std::endl;
+        return -1;
+    }
+
+    int res = 0;
+    int cnt = instrVec.size();
+    char **instrument = new char *[cnt];
+
+    for (int i = 0; i < cnt; i++)
+    {
+        instrument[i] = new char[31];
+        std::memcpy(instrument[i], instrVec[i].data(), sizeof(instrument[0]));
+    }
+
+    res = m_api->SubscribeMarketData(instrument, cnt);
+
+
+
+    for (int i = 0 ; i< cnt ; i++)
+    {
+        delete[] instrument[i];
+    }
+
+    delete[] instrument;
+
+
+}
+
+int MyMarketApi::ReqSubscribeMarketData(const std::string &instrumentID)
+{
     int res = SYS_FAIL;
-    char ** instrument = new char*[1];
+    char **instrument = new char *[1];
     instrument[0] = new char[31];
     std::memcpy(instrument[0], instrumentID.c_str(), sizeof(instrument[0]));
     res = m_api->SubscribeMarketData(instrument, 1);
 
-
-    delete []instrument[0];
-    delete []instrument;
+    delete[] instrument[0];
+    delete[] instrument;
     return res;
 }
 
-
-int MyMarketApi::ReqUnSubscribeMarketData(const std::string& instrumentID) {
+int MyMarketApi::ReqUnSubscribeMarketData(const std::string &instrumentID)
+{
     int res = SYS_FAIL;
-    char **instrument = new char*[1];
+    char **instrument = new char *[1];
     instrument[0] = new char[31];
     std::memcpy(instrument[0], instrumentID.c_str(), sizeof(instrument[0]));
     res = m_api->UnSubscribeMarketData(instrument, 1);
-    
-    delete []instrument[0];
-    delete []instrument;
+
+    delete[] instrument[0];
+    delete[] instrument;
 
     return res;
 }
 
-const char* MyMarketApi::GetTradingDay()
+const char *MyMarketApi::GetTradingDay()
 {
     return m_api->GetTradingDay();
 }

@@ -334,3 +334,20 @@ int MyCtpApi::ReqQryDepthMarketData(const std::string & instrumentID)
 
     return m_api->ReqQryDepthMarketData(&field, m_rid++);
 }
+
+
+int MyCtpApi::ReqQryInstrument()
+{
+    auto check_flag = m_login_stautus.load();
+
+    if (!check_flag)
+    {
+        std::cout << "please login fisrt!" << std::endl;
+        return SYS_FAIL;
+    }
+
+
+    CThostFtdcQryInstrumentField field = {0};
+
+    return m_api->ReqQryInstrument(&field, m_rid++);
+}
