@@ -1,6 +1,7 @@
 #include "apiWrapper/ctp/MyMarketSpi.h"
 #include <chrono>
 #include <vector>
+#include "spdlog/spdlog.h"
 
 MyMarketSpi::MyMarketSpi(MyMarketApi *api) : m_api_(api) {}
 
@@ -47,20 +48,16 @@ void MyMarketSpi::OnRspUserLogout(
 void MyMarketSpi::OnRspSubMarketData(
     CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
-    std::cout << "OnRspSubMarketData!" << std::endl;
 
     if (pRspInfo && pRspInfo->ErrorID == 0)
     {
         if (pSpecificInstrument)
         {
-            std::cout << "subscribe success: " << pSpecificInstrument->InstrumentID << std::endl;
+            SPDLOG_INFO("OnRspSubMarketData, subscribe success: {}", pSpecificInstrument->InstrumentID);
         }
     }
 
-    if (!pSpecificInstrument)
-    {
-        std::cout << "OnRspSubMarketData  Failed,  no pSpecificInstrument" << std::endl;
-    }
+
 }
 
 void MyMarketSpi::OnRspUnSubMarketData(
@@ -79,11 +76,10 @@ void MyMarketSpi::OnRspUnSubMarketData(
 
 void MyMarketSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData)
 {
-    typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> nanoClock_type;
-    //获取当前时间点，windows system_clock是100纳秒级别的(不同系统不一样，自己按照介绍的方法测试)，所以要转换
-    nanoClock_type tp = std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now());
+    // typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> nanoClock_type;
+    // //获取当前时间点，windows system_clock是100纳秒级别的(不同系统不一样，自己按照介绍的方法测试)，所以要转换
+    // nanoClock_type tp = std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now());
 
-    std::cout << "timestamp: " << tp.time_since_epoch().count() << "ns"
-              << ", OnRtnMarketData, instrumentid: " << pDepthMarketData->InstrumentID
-              << ", lastPrice: " << pDepthMarketData->LastPrice << ", Volume: " << pDepthMarketData->Volume << std::endl;
+
+    SPDLOG_INFO("RTN, instrumentid: {}, lastPrice: {}, Volume: {}", pDepthMarketData->InstrumentID, pDepthMarketData->LastPrice, pDepthMarketData->Volume);
 }

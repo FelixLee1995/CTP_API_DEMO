@@ -14,8 +14,8 @@ const std::string pwd = "nanase4ever";
 
 
 
-const std::string marketfrontAddr = "tcp://180.168.146.187:10110";
-//const std::string marketfrontAddr = "tcp://127.0.0.1:17001";
+//const std::string marketfrontAddr = "tcp://180.168.146.187:10110";
+const std::string marketfrontAddr = "tcp://127.0.0.1:17001";
     
 const std::string appid = "simnow_client_test";
 const std::string authcode = "0000000000000000";
