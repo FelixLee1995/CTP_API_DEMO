@@ -12204,3 +12204,7 @@
 [2021-03-23 13:52:50.189100] [37518] [info] [MyMarketSpi.cpp:84(OnRtnDepthMarketData)] RTN, instrumentid: fu2104, lastPrice: 2370, Volume: 59
 [2021-03-23 13:52:50.194407] [37518] [info] [MyMarketSpi.cpp:84(OnRtnDepthMarketData)] RTN, instrumentid: zn2104, lastPrice: 21755, Volume: 74785
 [2021-03-23 13:52:50.199797] [37518] [info] [MyMarketSpi.cpp:84(OnRtnDepthMarketData)] RTN, instrumentid: sn2104, lastPrice: 175800, Volume: 1143
+[2021-03-23 16:01:31.721198] [9668] [info] [MyMarketSpi.cpp:56(MyMarketSpi::OnRspSubMarketData)] OnRspSubMarketData, subscribe success: *
+[2021-03-23 16:08:22.946452] [14360] [info] [MyMarketSpi.cpp:57(MyMarketSpi::OnRspSubMarketData)] OnRspSubMarketData, subscribe success: *
+[2021-03-23 16:12:53.733073] [24472] [info] [MyMarketSpi.cpp:57(MyMarketSpi::OnRspSubMarketData)] OnRspSubMarketData, subscribe success: *
+[2021-03-23 16:29:30.663266] [16512] [info] [MyMarketSpi.cpp:57(MyMarketSpi::OnRspSubMarketData)] OnRspSubMarketData, subscribe success: *

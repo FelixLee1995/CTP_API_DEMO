@@ -48,6 +48,7 @@ void MyMarketSpi::OnRspUserLogout(
 void MyMarketSpi::OnRspSubMarketData(
     CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
+    std::cout << "OnRspSubMarketData!" << std::endl;
 
     if (pRspInfo && pRspInfo->ErrorID == 0)
     {

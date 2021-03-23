@@ -7,8 +7,9 @@
 #define JUPITER_COREDUMP_H
 
 
-
+#ifdef linux
 #include <sys/resource.h>
+#endif
 #include <iostream>
 
 

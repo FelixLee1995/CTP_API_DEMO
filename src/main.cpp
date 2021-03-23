@@ -7,7 +7,7 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/spdlog.h"
 #include "coredump.h"
-#include <sys/unistd.h>
+#include "plantformtools.h"
 
 
 
@@ -74,14 +74,14 @@ int main() {
     MyMarketApi* md_api = new MyMarketApi(brokerid, userid, pwd, frontAddr);
 
     md_api->Init();   
-    usleep(1000000);
+    CommonSleep(1000);
     //std::cout << "TradingDay is " << md_api->GetTradingDay() << std::endl;
     
     
 
     md_api->ReqUserLogin();
-    
-    usleep(1000000);
+
+    CommonSleep(1000);
 
 
     std::string cmd_1;
@@ -102,7 +102,7 @@ int main() {
         if (cmd_1 == "sleep")
         {
             auto secs = atoi(cmd_2.c_str());
-            usleep(secs*1000000);
+            CommonSleep(secs*1000);
         }
         else if (cmd_1 == "sub")
         {
@@ -150,7 +150,7 @@ int main() {
 
     while(true)
     {
-        usleep(1000000);
+        CommonSleep(10000);
     }
 
 
