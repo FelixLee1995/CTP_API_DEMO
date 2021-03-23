@@ -14,7 +14,7 @@
 
 void SetLogger()
 {
-     auto logger = spdlog::daily_logger_mt("daily_logger", "logs/system.log");
+    auto logger = spdlog::daily_logger_mt("daily_logger", "logs/system.log");
     logger->set_level(spdlog::level::debug);
 
     //logger->flush_on(spdlog::level::info);
@@ -84,30 +84,77 @@ int main() {
     usleep(1000000);
 
 
-    std::ifstream ifs_instr("instruments.txt");
-    if (!ifs_instr)
+    std::string cmd_1;
+    std::string cmd_2;
+
+
+
+    std::vector<std::string> cmdVec;
+
+    while(true)
     {
-        std::cerr << "cant find instruments.txt" << std::endl; 
-        return -2;
+
+        std::cin >> cmd_1;
+        std::cin >> cmd_2;
+        std::cout << "cmd is " << cmd_1 << " " << cmd_2 << std::endl;
+
+
+        if (cmd_1 == "sleep")
+        {
+            auto secs = atoi(cmd_2.c_str());
+            usleep(secs*1000000);
+        }
+        else if (cmd_1 == "sub")
+        {
+            md_api->ReqSubscribeMarketData(cmd_2);
+        }
+        else if (cmd_1 == "unsub")
+        {
+            md_api->ReqUnSubscribeMarketData(cmd_2);
+        }
     }
 
-    std::string instr;
-    while (ifs_instr >> instr)
-    {   
-        std::cout << "sub: " << instr << std::endl;
-        md_api->ReqSubscribeMarketData(instr);
-    }
 
-    std::cout << "after sub ========================" << std::endl;
+
+    // std::ifstream ifs_instr("instruments.txt");
+    // if (!ifs_instr)
+    // {
+    //     std::cerr << "cant find instruments.txt" << std::endl; 
+    //     return -2;
+    // }
+
+    // std::string instr;
+    // while (ifs_instr >> instr)
+    // {   
+    //     std::cout << "sub: " << instr << std::endl;
+    //     md_api->ReqSubscribeMarketData(instr);
+    // }
+
+
+    // std::cout << "start unsub" << std::endl;
+
+
+
+    // usleep(1000000);
+    // md_api->ReqUnSubscribeMarketData(instr);
 
     //std::vector<std::string> marketInstrs = {"I*"};
     //std::vector<std::string> marketInstrs = {"IF2103", "IC2105", "a2105", "cu2105", "au2101"};
     //md_api->ReqUnSubscribeMarketData("a2105");
 
 
+    std::cout << "start sleep" << std::endl;
 
 
-    getchar();
+
+
+    while(true)
+    {
+        usleep(1000000);
+    }
+
+
+    std::cout << "return" << std::endl;
 
     return 0;
 }
