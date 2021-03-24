@@ -81,6 +81,6 @@ void MyMarketSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMar
     // //获取当前时间点，windows system_clock是100纳秒级别的(不同系统不一样，自己按照介绍的方法测试)，所以要转换
     // nanoClock_type tp = std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now());
 
-
-    SPDLOG_INFO("RTN, instrumentid: {}, lastPrice: {}, Volume: {}", pDepthMarketData->InstrumentID, pDepthMarketData->LastPrice, pDepthMarketData->Volume);
+    SPDLOG_INFO("market record, instrid: {}, price: {}, vol: {}, updateTime: {}", pDepthMarketData->InstrumentID,
+        pDepthMarketData->LastPrice, pDepthMarketData->Volume, pDepthMarketData->UpdateTime);
 }

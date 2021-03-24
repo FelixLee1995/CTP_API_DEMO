@@ -11,7 +11,7 @@
 const std::string brokerid = "9999";
 const std::string userid = "123616";
 const std::string pwd = "nanase4ever";
-const std::string frontAddr = "tcp://180.168.146.187:10100";
+const std::string frontAddr = "tcp://180.168.146.187:10130";
 //const std::string frontAddr = "tcp://180.168.146.187:10130";
     
 const std::string appid = "simnow_client_test";

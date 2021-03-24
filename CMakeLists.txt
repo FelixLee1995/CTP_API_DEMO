@@ -44,7 +44,7 @@ if (MSVC)
     target_link_libraries(ctpdemo thostmduserapi_se thosttraderapi_se)
 endif ()
 
-if (LINUX)
+if (UNIX)
     target_link_libraries(ctpdemo thostmduserapi_se thosttraderapi_se pthread)
 endif ()
 target_link_libraries(orderinserttest thosttraderapi_se thostmduserapi_se gtest pthread)

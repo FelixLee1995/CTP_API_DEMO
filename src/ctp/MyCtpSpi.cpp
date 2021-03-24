@@ -1,6 +1,7 @@
 #include "apiWrapper/ctp/MyCtpSpi.h"
 #include <vector>
 #include <chrono>
+#include <fstream>
 
 MyCtpSpi::MyCtpSpi(MyCtpApi *api): m_api_(api) {
 
@@ -329,8 +330,7 @@ void MyCtpSpi::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThost
             ProductClass = 'C';
         }
         
-
-
+        std::ofstream ofs("./instr.txt", std::ios::ate);
         std::cout << pInstrument->InstrumentID << " " <<  ProductClass << " " << pInstrument->ExpireDate << " " << pInstrument->ExchangeID << std::endl;
     }
 

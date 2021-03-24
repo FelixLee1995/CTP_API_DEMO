@@ -12,9 +12,11 @@
 
 
 
-void SetLogger()
+void SetLogger(std::string path)
 {
-    auto logger = spdlog::daily_logger_mt("daily_logger", "logs/system.log");
+    std::string log_path;
+    log_path.append("logs/").append(path).append("system.log");
+    auto logger = spdlog::daily_logger_mt("daily_logger", log_path);
     logger->set_level(spdlog::level::debug);
 
     //logger->flush_on(spdlog::level::info);
@@ -39,15 +41,29 @@ void SetLogger()
 
 
 
-int main() {
+int main(int argc, char* argv[]) {
 
-    SetLogger();
+    if (argc == 2)
+    {   
+        std::string path;
+        path.append(argv[1]).append("/");
+        SetLogger(path);
+    }
+    else
+    {
+        SetLogger("");
+    }
+
+ 
 
     jupiter::SetCoredump();
 
     std::cout << "Hello World" << std::endl;
 
     std::cout << "CTP API VERSION is " << CThostFtdcTraderApi::GetApiVersion() << std::endl;
+
+
+
 
     
     std::ifstream ifs("config.txt");
@@ -83,38 +99,51 @@ int main() {
 
     CommonSleep(1000);
 
-
-    std::string cmd_1;
-    std::string cmd_2;
-
-
-
-    std::vector<std::string> cmdVec;
-
-    while(true)
+    std::string instrs_ld_path;
+    if (argc == 2)
     {
+        instrs_ld_path.append("./instr/").append(argv[1]).append(".txt");
+        std::cout << "load instrs from " << instrs_ld_path << std::endl;
 
-        std::cin >> cmd_1;
-        std::cin >> cmd_2;
-        std::cout << "cmd is " << cmd_1 << " " << cmd_2 << std::endl;
+        std::ifstream ifs(instrs_ld_path);
 
-
-        if (cmd_1 == "sleep")
+        if (!ifs)
         {
-            auto secs = atoi(cmd_2.c_str());
-            CommonSleep(secs*1000);
+            std::cerr << "Failed to find " << instrs_ld_path << std::endl;
         }
-        else if (cmd_1 == "sub")
+        std::string instr;
+        while (ifs >> instr)
         {
-            md_api->ReqSubscribeMarketData(cmd_2);
-        }
-        else if (cmd_1 == "unsub")
-        {
-            md_api->ReqUnSubscribeMarketData(cmd_2);
+            md_api->ReqSubscribeMarketData(instr);
         }
     }
+    else {
+        std::string cmd_1;
+        std::string cmd_2;
 
+        std::vector<std::string> cmdVec;
 
+        while (true)
+        {
+            std::cin >> cmd_1;
+            std::cin >> cmd_2;
+            std::cout << "cmd is " << cmd_1 << " " << cmd_2 << std::endl;
+
+            if (cmd_1 == "sleep")
+            {
+                auto secs = atoi(cmd_2.c_str());
+                CommonSleep(secs * 1000);
+            }
+            else if (cmd_1 == "sub")
+            {
+                md_api->ReqSubscribeMarketData(cmd_2);
+            }
+            else if (cmd_1 == "unsub")
+            {
+                md_api->ReqUnSubscribeMarketData(cmd_2);
+            }
+        }
+    }
 
     // std::ifstream ifs_instr("instruments.txt");
     // if (!ifs_instr)
