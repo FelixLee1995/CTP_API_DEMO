@@ -43,7 +43,7 @@ void SetLogger(std::string path)
 
 int main(int argc, char* argv[]) {
 
-    if (argc == 2)
+    if (argc >= 2)
     {   
         std::string path;
         path.append(argv[1]).append("/");
@@ -100,22 +100,24 @@ int main(int argc, char* argv[]) {
     CommonSleep(1000);
 
     std::string instrs_ld_path;
-    if (argc == 2)
+    if (argc >= 2)
     {
-        instrs_ld_path.append("./instr/").append(argv[1]).append(".txt");
-        std::cout << "load instrs from " << instrs_ld_path << std::endl;
+        // instrs_ld_path.append("./instr/").append(argv[1]).append(".txt");
+        // std::cout << "load instrs from " << instrs_ld_path << std::endl;
 
-        std::ifstream ifs(instrs_ld_path);
+        // std::ifstream ifs(instrs_ld_path);
 
-        if (!ifs)
-        {
-            std::cerr << "Failed to find " << instrs_ld_path << std::endl;
-        }
-        std::string instr;
-        while (ifs >> instr)
-        {
-            md_api->ReqSubscribeMarketData(instr);
-        }
+        // if (!ifs)
+        // {
+        //     std::cerr << "Failed to find " << instrs_ld_path << std::endl;
+        // }
+        // std::string instr;
+        // while (ifs >> instr)
+        // {
+        //     md_api->ReqSubscribeMarketData(instr);
+        // }
+
+         md_api->ReqSubscribeMarketData("*");
     }
     else {
         std::string cmd_1;

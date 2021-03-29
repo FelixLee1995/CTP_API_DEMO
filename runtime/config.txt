@@ -1,4 +1,4 @@
-tcp://kubernetes.angelmsger.com:7002
+tcp://10.3.5.210:7001
 9999
 123616
 nanase4ever
